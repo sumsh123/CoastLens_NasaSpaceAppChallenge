@@ -84,6 +84,11 @@ const SAND = '#eadfcb', MOCHA = '#3a2c24', LBAND = '#b0782a';
     if (next) $('#aNext').onclick = () => open(next);
     $('#aBack').onclick = () => { card.hidden = true; tree?.reset(); };
   };
+  // "Visit the fish's home" in the next section scrolls back here and opens a card
+  document.addEventListener('mangrove:open', (e) => {
+    const a = parts.find((q) => q.id === e.detail);
+    if (a) setTimeout(() => open(a), 1400); // once the scroll has (nearly) arrived
+  });
   parts.forEach((a) => {
     a.el = document.createElement('button');
     a.el.className = 'hot';
@@ -124,22 +129,60 @@ const SAND = '#eadfcb', MOCHA = '#3a2c24', LBAND = '#b0782a';
   }, { rootMargin: '600px 0px' }).observe(sec);
 }
 
-/* ---------- 4 · your fish, traced back ---------- */
+/* ---------- 4 · rewind your fish: plate → market → boat → creek → mangrove roots, then the tree's other jobs ---------- */
 {
-  const steps = $$('#chain .step').reverse(); // plate first
-  let played = false;
-  const play = () => {
-    if (played) return;
-    played = true;
-    $$('[data-fish]').forEach((b) => b.setAttribute('aria-pressed', 'true'));
-    if (REDUCE) { gsap.set(steps, { opacity: 1 }); gsap.set('#chain .trail', { scaleX: 1 }); return; }
+  const sec = $('#fish'), pano = $('#fish .pano'), fish = $('#fish .fish'), grill = $('#fish .grill'), words = $$('#fish .w');
+  const wave = $('#fish .wave'), carbon = $$('#fish .carbon circle'), mud = $('#fish .mud-carbon');
+  // where the fish is at each stop (% of the scene) and how big; it gets younger, so smaller, as we go back
+  const stops = [
+    { left: 50, top: 60, scale: 1 }, // on the plate
+    { left: 50, top: 55, scale: 0.78 }, // on ice at the market
+    { left: 50, top: 41, scale: 0.55 }, // in the boat's net
+    { left: 50, top: 62, scale: 0.42 }, // swimming in the creek
+    { left: 40, top: 80, scale: 0.13 }, // a baby among the mangrove roots
+  ];
+  const at = (s) => ({ left: s.left + '%', top: s.top + '%', scale: s.scale });
+  gsap.set(fish, { xPercent: -50, yPercent: -50, ...at(stops[0]) });
+  gsap.set(wave, { x: 1530, y: 112, transformOrigin: '50% 100%' });
+  gsap.set(words, { opacity: 0 });
+  // the "Visit the fish's home" link: scroll up to the 3D tree and open its daycare card
+  $('#fish .home-link').addEventListener('click', (e) => document.dispatchEvent(new CustomEvent('mangrove:open', { detail: e.currentTarget.dataset.open })));
+
+  if (REDUCE) { // no motion: show the end of the story
+    gsap.set(pano, { xPercent: -80 });
+    gsap.set(fish, at(stops[4]));
+    gsap.set([grill, wave, $('#fish .carbon')], { opacity: 0 });
+    gsap.set(mud, { opacity: 1 });
+    gsap.set([words[words.length - 1], $('#fish .home-link')], { autoAlpha: 1 });
+    fish.classList.add('swim');
+  } else {
     const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } });
-    tl.to(steps, { opacity: 1, duration: 0.9, stagger: 1 })
-      .to('#chain .trail', { scaleX: 1, duration: 5, ease: 'none' }, 0)
-      .fromTo('#chain .fishy', { opacity: 0, x: 0 }, { opacity: 1, x: () => -$('#chain').offsetWidth * 0.8, duration: 5, ease: 'none' }, 0);
-  };
-  $$('[data-fish]').forEach((b) => (b.onclick = play));
-  ScrollTrigger.create({ trigger: '#chain', start: 'top 45%', once: true, onEnter: play });
+    const say = (i, t) => tl.to(words[i - 1], { opacity: 0, y: -16, duration: 0.3 }, t).fromTo(words[i], { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35 }, t + 0.3);
+    tl.set(words[0], { opacity: 1 }, 0).to({}, { duration: 0.5 }); // a beat on the plate
+    stops.slice(1).forEach((s, j) => {
+      const i = j + 1, t = 0.5 + j * 1.2;
+      tl.to(pano, { xPercent: -20 * i, duration: 1 }, t).to(fish, { ...at(s), duration: 1 }, t);
+      say(i, t + 0.2);
+    });
+    tl.to(grill, { opacity: 0, duration: 0.3 }, 0.6); // no longer cooked
+    let t = 0.5 + 4 * 1.2 + 0.3;
+    // storm: a wave rolls in from the sea and breaks on the roots, short of the houses
+    say(5, t);
+    tl.to(wave, { opacity: 1, duration: 0.2 }, t + 0.2).to(wave, { x: 1652, duration: 1, ease: 'power1.in' }, t + 0.2).to(wave, { scaleY: 0.15, scaleX: 1.3, opacity: 0, duration: 0.5, ease: 'power2.out' }, t + 1.2);
+    t += 1.9;
+    // carbon: specks drift down from the leaves and stay in the mud
+    say(6, t);
+    tl.to($('#fish .carbon'), { opacity: 1, duration: 0.2 }, t + 0.1).to(carbon, { y: 164, duration: 1.1, ease: 'power1.in', stagger: 0.06 }, t + 0.2).to(carbon, { opacity: 0, duration: 0.2 }, t + 1.5).to(mud, { opacity: 0.85, duration: 0.3 }, t + 1.45);
+    t += 2;
+    say(7, t);
+    tl.to($('#fish .home-link'), { autoAlpha: 1, duration: 0.3 }, t + 0.5);
+    tl.to({}, { duration: 0.8 }, t + 0.6); // hold on the last line
+    const water = 0.5 + 2 * 1.2 + 0.6; // the fish is back in the water from the creek onwards
+    ScrollTrigger.create({
+      trigger: sec, start: 'top top', end: '+=520%', pin: true, scrub: 0.8, animation: tl,
+      onUpdate: () => fish.classList.toggle('swim', tl.time() > water),
+    });
+  }
 }
 
 /* ---------- 5 · blind spot: frame expands, cloud rolls in, radar reveals ---------- */

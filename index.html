@@ -43,29 +43,71 @@
   <p class="credit">3D model: <a href="https://sketchfab.com/3d-models/red-mangrove-tree-e806105d83bc440499495e62bb010f7a" target="_blank" rel="nofollow noopener">red-mangrove-tree</a> by <a href="https://sketchfab.com/Minambiente_Col" target="_blank" rel="nofollow noopener">SAVIA_Colombia</a> on <a href="https://sketchfab.com" target="_blank" rel="nofollow noopener">Sketchfab</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></p>
 </section>
 
-<!-- 4 · WHY IT MATTERS -->
-<section id="fish" class="screen dark">
-  <div class="wrap">
-    <span class="label">You already depend on one</span>
-    <h2 class="t-xl ask" data-split>Do you know someone who eats fish?</h2>
-    <div class="row" style="margin-top:34px" data-reveal>
-      <button class="btn" data-fish>Yes</button>
-      <button class="btn" data-fish>That's me</button>
-    </div>
-    <div class="chain" id="chain" aria-live="polite">
-      <div class="trail"></div>
-      <svg class="fishy" viewBox="0 0 54 28" aria-hidden="true"><path d="M2 14c8-10 24-12 36-4l12-8v24l-12-8C26 26 10 24 2 14z" fill="#f0566f"/><circle cx="12" cy="12" r="2" fill="#3a2c24"/></svg>
-      <div class="step"><svg viewBox="0 0 108 108" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="54" cy="54" r="52"/><path d="M26 70h56M34 70V50M44 70V44M54 70V40M64 70V46M74 70V52"/><circle cx="54" cy="30" r="14" fill="#4a5d3a" stroke="none"/><circle cx="40" cy="36" r="9" fill="#4a5d3a" stroke="none"/><circle cx="68" cy="36" r="9" fill="#4a5d3a" stroke="none"/></svg><b>Mangrove roots</b><small>Young fish, shrimp and crabs shelter here.</small></div>
-      <div class="step"><svg viewBox="0 0 108 108" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="54" cy="54" r="52"/><path d="M22 44c10-8 22 8 32 0s22 8 32 0M22 58c10-8 22 8 32 0s22 8 32 0M22 72c10-8 22 8 32 0s22 8 32 0"/></svg><b>Tidal creek</b><small>They grow, then move out with the tide.</small></div>
-      <div class="step"><svg viewBox="0 0 108 108" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="54" cy="54" r="52"/><path d="M24 60h60l-10 14H34zM54 60V28M54 30l18 22H54"/></svg><b>Fishing boat</b><small>A fisherman from the delta brings them in.</small></div>
-      <div class="step"><svg viewBox="0 0 108 108" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="54" cy="54" r="52"/><path d="M28 46h52v28H28zM24 46l6-14h48l6 14M42 46v28M66 46v28"/></svg><b>Market</b><small>Sold in Karachi and far beyond.</small></div>
-      <div class="step"><svg viewBox="0 0 108 108" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="54" cy="54" r="52"/><ellipse cx="54" cy="58" rx="30" ry="12"/><ellipse cx="54" cy="58" rx="18" ry="6"/></svg><b>Your plate</b><small>Start here. Follow it back.</small></div>
-    </div>
-    <div class="trio">
-      <div data-reveal><h3 class="t-m">A nursery</h3><p>Many of the fish, shrimp and crabs caught off this coast spend their early life among mangrove roots.</p></div>
-      <div data-reveal="0.12"><h3 class="t-m">A buffer</h3><p>Dense roots and trunks slow waves and hold mud in place before the sea reaches the villages behind them.</p></div>
-      <div data-reveal="0.24"><h3 class="t-m">A carbon store</h3><p>Mangroves bury carbon in the waterlogged mud beneath them, where it can stay locked away for a very long time.</p></div>
-    </div>
+<!-- 4 · WHY IT MATTERS: rewind your fish, then the tree's other jobs. Scroll plays it; nothing to click. -->
+<section id="fish">
+  <span class="label">You already depend on one</span>
+  <div class="words" aria-live="polite">
+    <p class="w t-l">Your last fish dinner.</p>
+    <p class="w t-l">Before that: the market.</p>
+    <p class="w t-l">Before that: a fishing boat.</p>
+    <p class="w t-l">Before that: the creek.</p>
+    <p class="w t-l">Remember the daycare?<br><em class="green">It probably grew up here.</em></p>
+    <p class="w t-l">When storms come, it takes the first hit.</p>
+    <p class="w t-l">And it locks carbon away in the mud.</p>
+    <p class="w t-l">Food. Shelter. Cleaner air.<br><em class="green">You already depend on mangroves.</em></p>
+  </div>
+  <a class="btn solid home-link" href="#tree" data-open="fish">Visit the fish's home &uarr;</a>
+  <div class="scene" role="img" aria-label="Scrolling rewinds a fish dinner: from the plate back to the market, a fishing boat and a creek, the fish getting younger and smaller, until it is a baby fish hiding in mangrove roots. Then a storm wave breaks on the mangroves before it reaches the houses behind them, and carbon from the tree sinks into the mud.">
+    <svg class="pano" viewBox="0 0 2000 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <!-- 0 · dinner -->
+      <rect x="0" y="150" width="400" height="90" fill="#dccdb2"/>
+      <path d="M0 150h400" stroke="#3a2c24" stroke-width="2" opacity=".35"/>
+      <path d="M48 120v50M42 120v18M54 120v18M48 138v0" stroke="#6a584b" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="200" cy="162" rx="132" ry="34" fill="#fffaf1" stroke="#3a2c24" stroke-width="2"/>
+      <ellipse cx="200" cy="162" rx="94" ry="22" fill="none" stroke="#3a2c24" stroke-width="1.5" opacity=".2"/>
+      <ellipse cx="298" cy="160" rx="14" ry="6" fill="#4a5d3a" transform="rotate(-20 298 160)"/><ellipse cx="310" cy="166" rx="12" ry="5" fill="#4a5d3a" opacity=".8" transform="rotate(15 310 166)"/>
+      <!-- 1 · market -->
+      <g fill="#3a2c24"><path d="M430 30h340v34H430z"/></g>
+      <g fill="#f4ede0"><path d="M464 30h34v34h-34zM532 30h34v34h-34zM600 30h34v34h-34zM668 30h34v34h-34zM736 30h34v34h-34z"/></g>
+      <path d="M430 64a17 12 0 0 0 34 0a17 12 0 0 0 34 0a17 12 0 0 0 34 0a17 12 0 0 0 34 0a17 12 0 0 0 34 0a17 12 0 0 0 34 0a17 12 0 0 0 34 0a17 12 0 0 0 34 0a17 12 0 0 0 34 0a17 12 0 0 0 34 0" fill="#3a2c24"/>
+      <path d="M440 64v86M760 64v86" stroke="#6a584b" stroke-width="5"/>
+      <rect x="430" y="150" width="340" height="90" fill="#6a584b"/>
+      <rect x="444" y="130" width="312" height="24" rx="10" fill="#e3ebe7"/>
+      <g fill="#fff" opacity=".8"><rect x="462" y="134" width="14" height="10" rx="2"/><rect x="720" y="136" width="12" height="9" rx="2"/><rect x="690" y="140" width="10" height="8" rx="2"/></g>
+      <g fill="#8f7f6c" opacity=".55"><path d="M470 136c8-8 22-9 32-3l8-5v16l-8-5c-10 6-24 5-32-3z"/><path d="M700 140c7-7 19-8 28-3l7-4v14l-7-4c-9 5-21 4-28-3z"/></g>
+      <!-- 2 · boat -->
+      <rect x="800" y="150" width="400" height="90" fill="#b9c6bf"/>
+      <path d="M800 160c25-8 40 8 66 0s40 8 66 0 40 8 66 0 40 8 66 0 40 8 66 0 40 8 66 0" fill="none" stroke="#f4ede0" stroke-width="2.5" opacity=".8"/>
+      <path d="M840 140h320l-34 44H874z" fill="#3a2c24"/>
+      <rect x="1080" y="112" width="52" height="28" fill="#6a584b"/>
+      <path d="M1050 140V40M1050 44L1000 60" stroke="#3a2c24" stroke-width="4" stroke-linecap="round"/>
+      <path d="M940 62Q1000 186 1060 62z" fill="#3a2c24" opacity=".07"/>
+      <path d="M940 62Q1000 186 1060 62M955 62Q1000 160 1045 62M970 62L1000 124L1030 62M940 62h120M948 84h104M960 106h80M974 128h52" fill="none" stroke="#3a2c24" stroke-width="1.6" stroke-dasharray="3 4" opacity=".75"/>
+      <path d="M1000 60v-0" stroke="#3a2c24"/>
+      <!-- 3 · creek -->
+      <rect x="1200" y="88" width="400" height="152" fill="#b9c6bf"/>
+      <path d="M1200 92c30-8 50 8 80 0s50 8 80 0 50 8 80 0 50 8 80 0 50 8 80 0" fill="none" stroke="#f4ede0" stroke-width="2.5" opacity=".8"/>
+      <path d="M1200 214c60-10 120 6 200 0s140-8 200 2v24h-400z" fill="#dccdb2"/>
+      <g stroke="#4a5d3a" stroke-width="3" stroke-linecap="round" opacity=".7"><path d="M1226 92v-38M1236 92v-52M1246 92v-30M1560 92v-44M1570 92v-30M1580 92v-50"/></g>
+      <g fill="#f4ede0" opacity=".8"><circle cx="1330" cy="130" r="3"/><circle cx="1338" cy="118" r="2"/><circle cx="1470" cy="170" r="2.5"/></g>
+      <!-- 4 · mangrove: sea on the left, the town on the right -->
+      <rect x="1600" y="112" width="290" height="128" fill="#b9c6bf"/>
+      <path d="M1600 116c26-7 44 7 70 0s44 7 70 0 44 7 70 0 44 7 70 0" fill="none" stroke="#f4ede0" stroke-width="2.5" opacity=".8"/>
+      <path d="M1600 216c80-8 160 4 290 -2v26h-290z" fill="#dccdb2"/>
+      <g class="mud-carbon" fill="#3a2c24" opacity="0"><circle cx="1712" cy="226" r="3"/><circle cx="1736" cy="230" r="3"/><circle cx="1758" cy="224" r="3"/><circle cx="1780" cy="229" r="3"/><circle cx="1802" cy="225" r="3"/><circle cx="1726" cy="233" r="2.5"/><circle cx="1792" cy="234" r="2.5"/></g>
+      <path d="M1880 240V118c30-14 70-18 120-16v138z" fill="#dccdb2"/>
+      <g fill="#6a584b"><path d="M1904 118v-26l16-14 16 14v26zM1946 112v-30l18-16 18 16v30z"/></g>
+      <g fill="#f4ede0"><rect x="1914" y="98" width="8" height="8"/><rect x="1958" y="90" width="9" height="9"/></g>
+      <g stroke="#3a2c24" stroke-width="3.5" fill="none" stroke-linecap="round"><path d="M1760 96Q1716 104 1692 216M1760 98Q1728 116 1716 216M1760 100Q1748 130 1742 216M1760 100Q1774 130 1780 216M1760 98Q1794 116 1806 216M1760 96Q1806 104 1832 216"/></g>
+      <path d="M1760 102V50" stroke="#3a2c24" stroke-width="7" stroke-linecap="round"/>
+      <g fill="#4a5d3a"><circle cx="1730" cy="44" r="28"/><circle cx="1790" cy="42" r="30"/><circle cx="1760" cy="30" r="28"/><circle cx="1708" cy="62" r="17"/><circle cx="1812" cy="62" r="17"/></g>
+      <g fill="#6f8457"><circle cx="1748" cy="36" r="13"/><circle cx="1798" cy="50" r="11"/></g>
+      <g stroke="#7d8f63" stroke-width="2.5" stroke-linecap="round"><path d="M1722 70v20M1794 72v22M1810 66v16"/></g>
+      <rect x="1600" y="112" width="280" height="104" fill="#b9c6bf" opacity=".35"/>
+      <g class="carbon" fill="#3a2c24" opacity="0"><circle cx="1716" cy="58" r="3"/><circle cx="1742" cy="50" r="3"/><circle cx="1764" cy="62" r="3"/><circle cx="1786" cy="54" r="3"/><circle cx="1806" cy="60" r="3"/><circle cx="1730" cy="74" r="2.5"/><circle cx="1796" cy="76" r="2.5"/></g>
+      <g class="wave" opacity="0"><path d="M0 104C10 60 40 24 82 18c26-4 44 10 40 30-3 16-22 20-30 10 18 2 22-18 4-22-28-5-50 30-54 68z" fill="#9fb3ab"/><path d="M82 18c26-4 44 10 40 30-3 16-22 20-30 10" fill="none" stroke="#fffaf1" stroke-width="5" stroke-linecap="round"/></g>
+    </svg>
+    <svg class="fish" viewBox="0 0 120 60" aria-hidden="true"><g class="body"><path d="M8 30C24 10 58 6 82 22l26-16v48L82 38C58 54 24 50 8 30z" fill="#f0566f"/><path d="M60 14c4 10 4 22 0 32" fill="none" stroke="#3a2c24" stroke-width="2" opacity=".25"/><circle cx="24" cy="27" r="3.4" fill="#3a2c24"/><g class="grill" stroke="#3a2c24" stroke-width="3.4" stroke-linecap="round" opacity=".5"><path d="M42 15l-8 30M56 13l-8 34M70 18l-7 26"/></g></g></svg>
   </div>
 </section>
 

@@ -317,6 +317,22 @@ footer nav a { text-decoration: none; }
 #paradox .placeholder.map { aspect-ratio: 16 / 10; display: grid; place-items: center; text-align: center; margin: 22px 0 18px; }
 #paradox .voice video { width: 100%; margin-top: 14px; background: var(--mocha); }
 
+/* 4 · rewind your fish */
+#fish { position: relative; height: 100vh; height: 100dvh; overflow: hidden; background: var(--sand-light); }
+#fish .label { position: absolute; z-index: 2; left: var(--pad); top: clamp(88px, 12vh, 130px); margin: 0; }
+#fish .words { position: absolute; z-index: 2; left: var(--pad); right: var(--pad); top: clamp(118px, 17vh, 180px); display: grid; justify-items: center; text-align: center; }
+#fish .w { grid-area: 1 / 1; opacity: 0; max-width: 24ch; font-size: clamp(1.7rem, 3.3vw, 2.9rem); line-height: 1.08; }
+#fish .home-link { position: absolute; z-index: 3; left: 50%; bottom: 2.5vh; transform: translateX(-50%); white-space: nowrap; visibility: hidden; opacity: 0; background: var(--mocha); color: var(--sand-light); border-color: var(--mocha); }
+#fish .scene { position: absolute; left: 50%; bottom: calc(2.5vh + 64px); transform: translateX(-50%); width: min(94vw, 980px, calc((100vh - 400px) * 5 / 3)); aspect-ratio: 5 / 3; overflow: hidden; border-radius: 4px; background: var(--sand-light); }
+#fish .pano { position: absolute; top: 0; left: 0; width: 500%; height: 100%; }
+#fish .fish { position: absolute; width: 40%; overflow: visible; }
+#fish .fish.swim .body { animation: swim 1.3s ease-in-out infinite; transform-origin: 60% 50%; }
+@keyframes swim { 0%, 100% { transform: translate(0, 0) rotate(-4deg); } 50% { transform: translate(-5px, 2px) rotate(4deg); } }
+@media (max-width: 900px) {
+  #fish .scene { bottom: auto; top: 32vh; width: 94vw; }
+  #fish .home-link { bottom: auto; top: calc(32vh + 56.4vw + 24px); }
+}
+
 @media (max-width: 900px) {
   #paradox .scales.two { grid-template-columns: 1fr; }
   body { font-size: 16px; }
