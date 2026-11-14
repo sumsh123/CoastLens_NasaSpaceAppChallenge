@@ -1,4 +1,4 @@
-import { init, gsap, ScrollTrigger, SplitText, REDUCE, FINE, DPR, EASE, $, $$, clamp, lerp, fit, whileVisible, loadStats } from './core.js';
+import { init, gsap, ScrollTrigger, SplitText, REDUCE, FINE, DPR, EASE, $, $$, clamp, lerp, fit, whileVisible } from './core.js';
 import { mosaic, cover, drawClouds, BBOX } from './tiles.js';
 import { Mangrove3D } from './mangrove3d.js';
 
@@ -49,14 +49,6 @@ const SAND = '#eadfcb', MOCHA = '#3a2c24', LBAND = '#b0782a';
     hud.textContent = `${lat.toFixed(3)}°N ${lon.toFixed(3)}°E`;
   });
   if (!REDUCE) gsap.to('#hero .title', { yPercent: -30, opacity: 0, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom 40%', scrub: 0.8 } });
-}
-
-/* ---------- 2 · one line, lit word by word ---------- */
-if (!REDUCE) {
-  document.fonts.ready.then(() => {
-    const s = SplitText.create('#line', { type: 'words', wordsClass: 'w' });
-    gsap.to(s.words, { opacity: 1, stagger: 0.12, ease: 'none', scrollTrigger: { trigger: '#oneline', start: 'top 70%', end: 'center 40%', scrub: 0.9 } });
-  });
 }
 
 /* ---------- 3 · the mangrove (Sketchfab model, dots pinned to real points on it) ---------- */
@@ -210,15 +202,4 @@ function lineChart(sel, pts, labels, col) {
 }
 lineChart('#gWorld', [152604, 147359], ['1996 · 152,604 km²', '2020 · 147,359 km²'], MOCHA);
 lineChart('#gDelta', [50973, 101446], ['1990 · 50,973 ha', '2023 · 101,446 ha'], MOCHA);
-loadStats().then((S) => {
-  const ys = S.mangrove_area.years, bw = 44;
-  $('#gLocal').innerHTML = `<line x1="6" x2="294" y1="100" y2="100" stroke="currentColor" opacity=".3"/>` + ys.map((y, i) => {
-    const hgt = (y.km2 / 200) * 92, x = 14 + i * ((280 - bw) / (ys.length - 1));
-    return `<rect class="bar" x="${x}" y="${100 - hgt}" width="${bw}" height="${hgt}" fill="#7d8f63"/>
-      <text x="${x + bw / 2}" y="${94 - hgt}" font-size="10" text-anchor="middle" font-family="Geist Mono" fill="currentColor">${y.km2.toFixed(1)}</text>
-      <text x="${x + bw / 2}" y="116" font-size="10" text-anchor="middle" font-family="Geist Mono" fill="currentColor" opacity=".7">${y.year}</text>`;
-  }).join('');
-  if (REDUCE) return;
-  gsap.from('#gLocal .bar', { scaleY: 0, transformOrigin: '50% 100%', duration: 1.6, ease: EASE, stagger: 0.15, scrollTrigger: { trigger: '#gLocal', start: 'top 85%', once: true } });
-});
 if (!REDUCE) $$('.draw').forEach((l) => gsap.from(l, { strokeDashoffset: 1, duration: 2, ease: 'power2.inOut', scrollTrigger: { trigger: l, start: 'top 85%', once: true } }));

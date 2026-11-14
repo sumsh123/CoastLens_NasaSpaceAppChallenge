@@ -19,16 +19,12 @@
   <div class="hud tl"><b>Keti Bandar</b> · Indus Delta<br>Sindh, Pakistan</div>
   <div class="hud tr">Lens <b id="hudPos" class="num">24.050°N 67.500°E</b><br>NISAR L-band · HV · <b>10 Oct 2026</b><br>Orbit 747 km · repeat 12 days</div>
   <div class="title">
-    <h1 class="t-hero" data-split>CoastLens</h1>
-    <p data-reveal="0.5">Move across the clouds. The circle shows what radar sees underneath.</p>
+    <span class="label">CoastLens</span>
+    <h1 class="t-xl" data-split style="max-width:14ch">Watching Pakistan's mangrove forest through the clouds.</h1>
+    <p data-reveal="0.5">With NASA–ISRO radar, every 12 days. Move to see through the clouds.</p>
   </div>
   <div class="scrollcue mono" aria-hidden="true"><span>Scroll</span><i></i></div>
   <p class="credit">Image: Sentinel-2, Nov 2025 to Feb 2026 · Radar: NISAR L-band HV, 10 Oct 2026 (provisional), processed by CoastLens · Clouds illustrated</p>
-</section>
-
-<!-- 2 · ONE LINE -->
-<section id="oneline" class="screen center light">
-  <h2 class="t-xl" id="line">We watch the mangroves of the Indus Delta from space, and show where they are changing.</h2>
 </section>
 
 <!-- 3 · WHAT IS A MANGROVE -->
@@ -37,9 +33,9 @@
   <div id="sfGrab" class="sf-grab" aria-hidden="true"></div>
   <p class="sf-msg mono" aria-live="polite"><span class="wait">Loading the 3D tree…</span><span class="err">The 3D tree could not load. <a href="https://sketchfab.com/3d-models/red-mangrove-tree-e806105d83bc440499495e62bb010f7a" target="_blank" rel="noopener">Open it on Sketchfab</a></span></p>
   <div class="copy">
-    <span class="label">What is a mangrove?</span>
+    <span class="label">Meet the mangrove</span>
     <h2 class="t-l" data-split>A tree that grows in the sea.</h2>
-    <p class="lede" data-reveal style="margin-top:18px">It is more like you than you think. Open the four marked parts.</p>
+    <p class="lede" data-reveal style="margin-top:18px">And it's more like you than you think. Open the four marked parts.</p>
   </div>
   <div id="hots"></div>
   <div class="acard" id="acard" hidden></div>
@@ -50,7 +46,7 @@
 <!-- 4 · WHY IT MATTERS -->
 <section id="fish" class="screen dark">
   <div class="wrap">
-    <span class="label">Why it matters to you</span>
+    <span class="label">You already depend on one</span>
     <h2 class="t-xl ask" data-split>Do you know someone who eats fish?</h2>
     <div class="row" style="margin-top:34px" data-reveal>
       <button class="btn" data-fish>Yes</button>
@@ -75,7 +71,7 @@
 
 <!-- 5 · THE BLIND SPOT (image expands on scroll) -->
 <section id="blind" class="scan">
-  <h2 class="t-xl intro" data-split>Then the clouds come.</h2>
+  <h2 class="t-xl intro" data-split>Clouds hide this coast for months.</h2>
   <div class="frame"><canvas id="cBlind" class="fill" role="img" aria-label="The Keti Bandar coast from space. Cloud covers it, then a radar sweep reveals the NISAR radar image."></canvas></div>
   <div class="hud"><span id="bStage">01 / 03 · Optical</span></div>
   <div class="copy">
@@ -85,12 +81,14 @@
   <p class="credit" style="background:var(--sand-light);padding:4px 8px">Sentinel-2, 2025 to 26 · NISAR L-band HV, 10 Oct 2026 · Clouds illustrated</p>
 </section>
 
-<!-- 6 · GLOBAL VS LOCAL -->
+<!-- 6 · GLOBAL VS LOCAL: the numbers say one thing, the people of Rehri Goth another, the map settles it -->
 <section id="paradox" class="screen">
   <div class="wrap">
-    <span class="label">Global vs local</span>
-    <h2 class="t-xl" data-split style="max-width:16ch">If the big picture looks fine, why are we here?</h2>
-    <div class="scales">
+    <span class="label">The paradox</span>
+    <h2 class="t-xl" data-split style="max-width:18ch">On paper, the forest is growing back. On the ground, the sea is still taking homes.</h2>
+
+    <!-- 1. the big picture -->
+    <div class="scales two">
       <div class="scale" data-reveal>
         <span class="mono">The world</span>
         <h3 class="t-m">Shrinking, but slowly.</h3>
@@ -99,26 +97,31 @@
         <small>Global mangrove area, 1996 to 2020.<br>Source: Global Mangrove Watch v3 (Bunting et al., 2022).</small>
       </div>
       <div class="scale" data-reveal="0.12">
-        <span class="mono">The Indus Delta</span>
-        <h3 class="t-m">Reported to be growing.</h3>
+        <span class="mono">Pakistan's Indus Delta</span>
+        <h3 class="t-m">Reported to have doubled.</h3>
         <svg id="gDelta" viewBox="0 0 300 120" role="img" aria-label="A published study reports Indus Delta mangroves rising from 50,973 hectares in 1990 to 101,446 in 2023."></svg>
         <div class="big num">&times;2</div>
-        <small>50,973 ha (1990) to 101,446 ha (2023), whole delta.<br>Source: Ahmed et al., <i>Ecological Indicators</i>, 2025. Not our data, not our study area.</small>
-      </div>
-      <div class="scale local" data-reveal="0.24">
-        <span class="mono">Keti Bandar · our study area</span>
-        <h3 class="t-m">Mapped forest fell by almost a quarter.</h3>
-        <svg id="gLocal" viewBox="0 0 300 120" role="img" aria-label="Mapped mangrove area in the Keti Bandar study box: 183.6 square kilometres in 1996, 156.8 in 2007, 146.1 in 2010 and 140.8 in 2020."></svg>
-        <div class="big num"><em class="pink">&minus;23%</em></div>
-        <small>183.6 km² (1996) to 140.8 km² (2020) inside our fixed box, 67.2 to 67.8°E, 23.8 to 24.3°N.<br>Source: Global Mangrove Watch v3, area computed by CoastLens. Includes mapping error.</small>
+        <small>50,973 ha (1990) to 101,446 ha (2023), whole delta.<br>Source: Ahmed et al., <i>Ecological Indicators</i>, 2025.</small>
       </div>
     </div>
-    <div class="verdict">
-      <h3 class="t-l" data-split>Both can be true. A total can rise while one creek empties.</h3>
-      <div data-reveal>
-        <p class="lede" style="max-width:none">So we look at one place, with one method, again and again. And the newer satellites add a twist: since 2015 the forest that remains here has become greener, not thinner.</p>
-        <div class="row" style="margin-top:26px"><a class="btn solid" href="insights.html">See what we found</a></div>
-      </div>
+
+    <!-- 2. a voice from Rehri Goth -->
+    <div class="voice" data-reveal>
+      <span class="mono">Rehri Goth, Karachi</span>
+      <!-- TODO: put the clip at public/media/rehri-voice.mp4 (10–20 s, filmed with consent, with subtitles) and replace the placeholder with:
+      <video src="/media/rehri-voice.mp4" poster="/media/rehri-voice.jpg" controls playsinline preload="none"></video> -->
+      <div class="placeholder vid">Video goes here: a resident of Rehri Goth, 10–20 seconds, filmed with their consent, with English subtitles.</div>
+      <blockquote class="t-l">&ldquo;[Their words, exactly as said, e.g. about the mangroves that are gone.]&rdquo;</blockquote>
+      <small>[Name or &ldquo;a fisherman, Rehri Goth&rdquo;], [month year]. Quoted with consent.</small>
+    </div>
+
+    <!-- 3. the map as proof -->
+    <div class="proof" data-reveal>
+      <h3 class="t-l">So we checked from space.</h3>
+      <!-- TODO: Rehri Goth before/after mangrove map (team data), e.g. an image at public/media/rehri-map.jpg -->
+      <div class="placeholder map">Map goes here: Rehri Goth mangroves, earliest date vs latest date, lost areas in red. Needs the team's Rehri Goth data.</div>
+      <p class="lede">[One line with the measured number, e.g. &ldquo;Mangrove cover around Rehri Goth fell by X% between YEAR and YEAR.&rdquo;]</p>
+      <div class="row" style="margin-top:22px"><a class="btn solid" href="insights.html">Explore the map yourself &rarr;</a></div>
     </div>
   </div>
 </section>
@@ -127,14 +130,14 @@
 <section id="end" class="screen center dark">
   <div>
     <span class="label">Keep watching</span>
-    <p class="display t-xl" data-split style="max-width:17ch;margin:0 auto">Kharo Chan has reportedly lost 28 of its 42 villages to the sea.</p>
-    <p class="display t-xl" data-split style="max-width:17ch;margin:.12em auto 0"><em class="pink">Don't let Rehri Goth be next.</em></p>
-    <p class="lede note" data-reveal>Nobody has measured Rehri Goth's mangroves the way we measured Keti Bandar's. That is the point. NISAR looks again every 12 days, and the data is open.</p>
+    <p class="display t-xl" data-split style="max-width:17ch;margin:0 auto">Sukhi Bandar disappeared without a witness.</p>
+    <p class="display t-xl" data-split style="max-width:17ch;margin:.12em auto 0"><em class="green">Rehri Goth won't.</em></p>
+    <p class="lede note" data-reveal>NISAR looks again every 12 days. Now you can too.</p>
     <div class="row" style="justify-content:center;margin-top:36px" data-reveal>
-      <a class="btn solid" href="nisar.html">How the radar works</a>
-      <a class="btn" href="insights.html">Our findings</a>
+      <a class="btn solid" href="insights.html">Explore the map</a>
+      <a class="btn" href="nisar.html">How it works</a>
+      <a class="btn" href="https://github.com/sumsh123/CoastLens_NasaSpaceAppChallenge">Open data &amp; code</a>
     </div>
-    <p class="mono" style="margin-top:44px;opacity:.55" data-reveal>Kharo Chan figure as reported by The News on Sunday. Verify before reuse. See About.</p>
   </div>
 </section>
 

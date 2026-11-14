@@ -309,7 +309,16 @@ footer nav a { text-decoration: none; }
 .leaflet-control-attribution { font-size: 9px !important; background: rgba(244, 237, 224, 0.8) !important; }
 .leaflet-bar a { border-radius: 0 !important; background: var(--sand-light) !important; color: var(--mocha) !important; }
 
+/* 6 · paradox: global numbers, a local voice, the map as proof */
+#paradox .scales.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#paradox .voice, #paradox .proof { margin-top: clamp(64px, 10vh, 120px); max-width: 860px; }
+#paradox .voice blockquote { margin: 22px 0 12px; font-family: var(--font-display); }
+#paradox .placeholder.vid { aspect-ratio: 16 / 9; display: grid; place-items: center; text-align: center; margin-top: 14px; }
+#paradox .placeholder.map { aspect-ratio: 16 / 10; display: grid; place-items: center; text-align: center; margin: 22px 0 18px; }
+#paradox .voice video { width: 100%; margin-top: 14px; background: var(--mocha); }
+
 @media (max-width: 900px) {
+  #paradox .scales.two { grid-template-columns: 1fr; }
   body { font-size: 16px; }
   .nav nav { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh; background: var(--mocha); color: var(--sand-light); flex-direction: column; justify-content: center; align-items: flex-start; padding: var(--pad); gap: 8px; opacity: 0; visibility: hidden; transition: opacity 0.6s var(--ease), visibility 0.6s; }
   .nav nav a { font-family: var(--font-display); font-size: 2.8rem; text-transform: none; letter-spacing: -0.01em; }
