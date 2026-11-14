@@ -15,6 +15,9 @@ const SAND = '#eadfcb', MOCHA = '#3a2c24', LBAND = '#b0782a';
   if (!REDUCE) gsap.to(view, { zoom: 1.04, duration: 5, ease: 'power3.out' }); // the descent
   c.addEventListener('pointermove', (e) => { const r = c.getBoundingClientRect(); lens.tx = (e.clientX - r.left) * DPR; lens.ty = (e.clientY - r.top) * DPR; });
   c.addEventListener('pointerleave', () => { lens.tx = null; });
+  // the radar lens is the cursor here, so hide the site's custom cursor over the hero image
+  c.addEventListener('pointerenter', () => $('.cursor')?.classList.add('gone'));
+  c.addEventListener('pointerleave', () => $('.cursor')?.classList.remove('gone'));
 
   whileVisible(c, () => {
     if (fit(c)) { lens.x = c.width * 0.7; lens.y = c.height * 0.45; }

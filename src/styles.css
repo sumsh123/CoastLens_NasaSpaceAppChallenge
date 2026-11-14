@@ -121,6 +121,8 @@ em.green { font-style: italic; color: var(--mangrove); }
 #hero canvas { cursor: none; touch-action: pan-y; }
 #hero .veil { position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(180deg, rgba(234, 223, 203, 0.55) 0%, rgba(234, 223, 203, 0) 30%, rgba(234, 223, 203, 0) 55%, rgba(234, 223, 203, 0.9) 100%); }
 #hero .title { position: absolute; z-index: 4; left: var(--pad); bottom: clamp(70px, 11vh, 120px); pointer-events: none; }
+#hero .title h1 { font-size: clamp(2.4rem, 5vw, 4.6rem); line-height: 1.02; max-width: 15ch; }
+#hero .title::before { content: ''; position: absolute; z-index: -1; inset: -60px -90px -50px -120px; background: radial-gradient(closest-side, rgba(244, 237, 224, 0.92), rgba(244, 237, 224, 0.6) 60%, rgba(244, 237, 224, 0)); } /* soft backing so the title reads over the satellite image */
 #hero .title p { margin-top: 18px; font-size: clamp(1rem, 1.4vw, 1.2rem); max-width: 34ch; }
 #hero .hud.tl { left: var(--pad); top: 96px; }
 #hero .hud.tr { right: var(--pad); top: 96px; text-align: right; }
