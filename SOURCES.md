@@ -23,7 +23,10 @@
 
 ## Statements without a number that still need a citation
 - Mangroves as nursery habitat, wave buffer and carbon store (home page). Add a reference (for example IUCN or FAO) on the About page.
-- The four mangrove facts on the 3D tree (pencil roots, salt on leaves, seedlings, nursery) describe the grey mangrove, *Avicennia marina*. Have a botanist or NGO contact confirm.
+- The four mangrove facts on the home page 3D tree (stilt roots with breathing pores, salt sent to older leaves, hanging seedling pods, root nursery) describe the red / stilt-root mangrove, *Rhizophora*, which is what the 3D model shows. Have a botanist or NGO contact confirm. (The NISAR page's radar tree is still the grey mangrove, *Avicennia marina*.)
+
+## 3D model
+- Home page tree: "red-mangrove-tree" by SAVIA_Colombia (Sketchfab, https://sketchfab.com/3d-models/red-mangrove-tree-e806105d83bc440499495e62bb010f7a), licensed CC BY 4.0. Shown unmodified through the Sketchfab Viewer API; the info dots are ours.
 
 ## Illustrations (not data)
-Clouds, the 3D tree, the radar wave animations, the orbit drawing, and the S-band view.
+Clouds, the NISAR page's 3D tree, the radar wave animations, the orbit drawing, and the S-band view.

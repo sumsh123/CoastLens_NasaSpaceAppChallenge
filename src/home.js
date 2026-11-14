@@ -1,6 +1,6 @@
 import { init, gsap, ScrollTrigger, SplitText, REDUCE, FINE, DPR, EASE, $, $$, clamp, lerp, fit, whileVisible, loadStats } from './core.js';
 import { mosaic, cover, drawClouds, BBOX } from './tiles.js';
-import { Tree3D, TREE, FOCUS } from './tree3d.js';
+import { Mangrove3D } from './mangrove3d.js';
 
 init();
 const OPTICAL = 's2_truecolor_2025_26', RADAR = 'nisar_hv_20261010';
@@ -59,44 +59,77 @@ if (!REDUCE) {
   });
 }
 
-/* ---------- 3 · the mangrove ---------- */
+/* ---------- 3 · the mangrove (Sketchfab model, dots pinned to real points on it) ---------- */
 {
-  const tree = Tree3D($('#cTree'), 'tree'), hots = $('#hots'), card = $('#acard'), seen = new Set();
+  const sec = $('#tree'), frameEl = $('#sfTree'), hots = $('#hots'), card = $('#acard'), seen = new Set();
+  // Facts are for the red / stilt-root mangrove (Rhizophora) that the model shows.
   const parts = [
-    { id: 'roots', label: 'Pencil roots', at: [1.6, 0.35, 1.2], t: 'It breathes through snorkels.', a: 'Pencil roots', b: 'Your lungs', p: 'The mud holds almost no oxygen. So the tree sends up hundreds of pencil-thin roots that stand above the mud and take in air at low tide.' },
-    { id: 'leaf', label: 'Leaves', at: [0.4, 3.4, 0.3], t: 'It sweats salt, like you on a hot day.', a: 'Salty leaves', b: 'Your sweat', p: 'Seawater would kill most trees. This one pushes salt out through its leaves. Look closely and you can find the crystals.' },
-    { id: 'seed', label: 'Seedlings', at: TREE.seeds[0], t: 'Its young are born ready.', a: 'Seedlings', b: 'A newborn', p: 'The seed starts to grow while it is still on the parent tree. When it drops, it floats on the tide until it finds mud.' },
-    { id: 'fish', label: 'Under the water', at: [-1.4, 0.2, -0.8], t: 'It runs a nursery.', a: 'Root maze', b: 'A nursery', p: 'When the tide comes in, young fish and shrimp hide among the roots until they are big enough for open water.' },
+    { id: 'roots', label: 'Stilt roots', t: 'It breathes through its stilts.', a: 'Stilt roots', b: 'Your nose', p: 'The mud holds almost no oxygen. These arching roots prop the tree up, and tiny pores on them take in air whenever the tide is out.' },
+    { id: 'leaf', label: 'Leaves', t: 'It drinks seawater and bins the salt.', a: 'Old leaves', b: 'Your kidneys', p: 'Its roots keep out most of the salt in seawater. The little that gets in is sent to older leaves, which turn yellow and drop off.' },
+    { id: 'seed', label: 'Hanging pods', t: 'Its babies are born ready.', a: 'Hanging pods', b: 'A newborn', p: 'Each long green pod is a seedling already growing on the parent tree. When it drops, it floats on the tide until it lodges in mud.' },
+    { id: 'fish', label: 'Under the water', t: 'It runs a daycare.', a: 'Root maze', b: 'A daycare', p: 'When the tide comes in, young fish and shrimp hide in this tangle of roots until they are big enough for open water.' },
   ];
+  let tree = null;
+  const wide = () => innerWidth > 900, copyEl = $('#tree .copy');
+  // centre of the free area between the heading block and `until` (the card, or the section edge), as fractions of the viewer
+  const freeSpot = (until) => {
+    const f = frameEl.getBoundingClientRect(), c = copyEl.getBoundingClientRect();
+    if (wide()) return { fx: clamp(((Math.max(f.left, c.right) + Math.min(f.right, until.left)) / 2 - f.left) / f.width, 0.15, 0.85), fy: 0.5 };
+    return { fx: 0.5, fy: clamp(((Math.max(f.top, c.bottom) + Math.min(f.bottom, until.top)) / 2 - f.top) / f.height, 0.2, 0.8) };
+  };
   const open = (a) => {
     seen.add(a.id); a.el.classList.add('seen');
     $('#foundN').textContent = seen.size;
-    tree.st.focus = FOCUS[a.id]; tree.st.auto = false;
     const next = parts.find((q) => !seen.has(q.id));
     card.hidden = false;
     card.innerHTML = `<span class="mono">${seen.size} of 4</span><h3>${a.t}</h3>
       <div class="eq"><div><b>${a.a}</b><span>the mangrove</span></div><span>=</span><div><b>${a.b}</b><span>you</span></div></div>
       <p>${a.p}</p>
       <div class="row">${next ? `<button class="btn" id="aNext">Next: ${next.label}</button>` : `<a class="btn" href="#fish">Why it matters</a>`}<button class="btn" id="aBack">Back to the tree</button></div>`;
+    // glide to the part, centred in the space between the heading and the card (beside it on desktop, above it on phones)
+    tree?.focus(a.id, freeSpot(card.getBoundingClientRect()));
     if (!REDUCE) gsap.from(card, { opacity: 0, y: 24, duration: 0.9, ease: EASE });
     if (next) $('#aNext').onclick = () => open(next);
-    $('#aBack').onclick = () => { card.hidden = true; tree.st.focus = null; tree.st.auto = true; };
+    $('#aBack').onclick = () => { card.hidden = true; tree?.reset(); };
   };
   parts.forEach((a) => {
     a.el = document.createElement('button');
     a.el.className = 'hot';
     a.el.innerHTML = `<i></i><span>${a.label}</span>`;
     a.el.onclick = () => open(a);
+    a.el.style.display = 'none';
     hots.appendChild(a.el);
   });
-  whileVisible($('#tree'), () => {
-    const P = tree.draw();
-    parts.forEach((a) => {
-      const p = P(a.at), show = p && (card.hidden || !seen.has(a.id));
-      a.el.style.display = show ? 'flex' : 'none';
-      if (show) { a.el.style.left = p.x / DPR + 'px'; a.el.style.top = p.y / DPR + 'px'; }
-    });
-  });
+
+  // load the (heavy) model only when the section is about to be seen
+  new IntersectionObserver(([e], io) => {
+    if (!e.isIntersecting) return;
+    io.disconnect();
+    const edge = () => { const r = sec.getBoundingClientRect(); return { left: r.right, top: r.bottom }; };
+    Mangrove3D(frameEl, $('#sfGrab'), { home: () => freeSpot(edge()) })
+      .then((t) => {
+        tree = t;
+        sec.classList.add('ready');
+        let rs = 0;
+        addEventListener('resize', () => { clearTimeout(rs); rs = setTimeout(() => { if (!tree.st.focused) tree.reset(0); }, 200); });
+        let busy = false;
+        whileVisible(sec, () => {
+          if (busy) return;
+          busy = true;
+          tree.frame().then((P) => {
+            const f = frameEl.getBoundingClientRect(), s = sec.getBoundingClientRect();
+            parts.forEach((a) => {
+              const p = P[a.id], show = p.inView && (card.hidden || !seen.has(a.id));
+              a.el.style.display = show ? 'flex' : 'none';
+              a.el.classList.toggle('behind', !p.front);
+              a.el.style.left = f.left - s.left + p.x + 'px';
+              a.el.style.top = f.top - s.top + p.y + 'px';
+            });
+          }).finally(() => (busy = false));
+        });
+      })
+      .catch(() => sec.classList.add('failed'));
+  }, { rootMargin: '600px 0px' }).observe(sec);
 }
 
 /* ---------- 4 · your fish, traced back ---------- */
