@@ -132,22 +132,36 @@ if (!REDUCE) {
   }, { rootMargin: '600px 0px' }).observe(sec);
 }
 
-/* ---------- 4 · your fish, traced back ---------- */
+/* ---------- 4 · rewind your fish: plate → market → boat → creek → mangrove roots ---------- */
 {
-  const steps = $$('#chain .step').reverse(); // plate first
-  let played = false;
-  const play = () => {
-    if (played) return;
-    played = true;
-    $$('[data-fish]').forEach((b) => b.setAttribute('aria-pressed', 'true'));
-    if (REDUCE) { gsap.set(steps, { opacity: 1 }); gsap.set('#chain .trail', { scaleX: 1 }); return; }
-    const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } });
-    tl.to(steps, { opacity: 1, duration: 0.9, stagger: 1 })
-      .to('#chain .trail', { scaleX: 1, duration: 5, ease: 'none' }, 0)
-      .fromTo('#chain .fishy', { opacity: 0, x: 0 }, { opacity: 1, x: () => -$('#chain').offsetWidth * 0.8, duration: 5, ease: 'none' }, 0);
-  };
-  $$('[data-fish]').forEach((b) => (b.onclick = play));
-  ScrollTrigger.create({ trigger: '#chain', start: 'top 45%', once: true, onEnter: play });
+  const bgs = $$('#fish .bg'), words = $$('#fish .w'), fish = $('#fish .fish'), grill = $('#fish .grill');
+  // fish size and spot (as % of the scene) at each stop; it shrinks as it goes back in time
+  const stops = [{ s: 1, x: 0, y: 0 }, { s: 0.75, x: 0, y: -18 }, { s: 0.55, x: 0, y: 40 }, { s: 0.38, x: 0, y: 10 }, { s: 0.13, x: 4, y: 105 }];
+  const show = (i) => { bgs.forEach((e, k) => gsap.set(e, { opacity: k === i ? 1 : 0 })); words.forEach((e, k) => gsap.set(e, { opacity: k === i ? 1 : 0 })); };
+  gsap.set(fish, { xPercent: -50, yPercent: -50 });
+  if (REDUCE) {
+    show(4);
+    gsap.set(grill, { opacity: 0 });
+    gsap.set(fish, { scale: stops[4].s, xPercent: -50 + stops[4].x * 5, yPercent: -50 + stops[4].y });
+  } else {
+    show(0);
+    const tl = gsap.timeline({ defaults: { ease: 'power1.inOut', duration: 1 } });
+    tl.to(grill, { opacity: 0, duration: 0.4 }, 0.3);
+    stops.slice(1).forEach((p, j) => {
+      const i = j + 1, at = i * 1.4;
+      tl.to(bgs[i - 1], { opacity: 0, duration: 0.5 }, at - 0.5)
+        .to(bgs[i], { opacity: 1, duration: 0.5 }, at - 0.3)
+        .to(words[i - 1], { opacity: 0, duration: 0.4 }, at - 0.5)
+        .to(words[i], { opacity: 1, duration: 0.4 }, at - 0.1)
+        .to(fish, { scale: p.s, xPercent: -50 + p.x * 5, yPercent: -50 + p.y, duration: 1.2 }, at - 0.8);
+    });
+    tl.to({}, { duration: 0.8 }); // hold on the roots
+    ScrollTrigger.create({
+      trigger: '#fish', start: 'top top', end: '+=280%', pin: true, scrub: 0.8, animation: tl,
+      // a gentle swim once it is back in the water
+      onUpdate: (st) => fish.classList.toggle('swim', st.progress > 0.55),
+    });
+  }
 }
 
 /* ---------- 5 · blind spot: frame expands, cloud rolls in, radar reveals ---------- */
